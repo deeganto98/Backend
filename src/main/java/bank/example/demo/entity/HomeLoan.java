@@ -2,16 +2,19 @@ package bank.example.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class HomeLoan {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String homeLoanId;
+    // @GenericGenerator(name="hml_generator",strategy="bank.example.demo.functionalities.HomeLoanIdGenerator")
+    // @GeneratedValue(generator = "hml_generator")
+    private int homeLoanId;
 
     private String propertyType;
     private String propertyAddress;
@@ -19,13 +22,13 @@ public class HomeLoan {
     private int homeLoanPeriod;
     private int homeLoanEmiPaid;
 
-    @OneToOne(mappedBy = "homeLoan")
-    private User user;
+    // @OneToOne(mappedBy = "homeLoan")
+    // private User user;
 
     public HomeLoan() {
     }
 
-    public HomeLoan(String homeLoanId, String propertyType, String propertyAddress, String homeLoanAmount,
+    public HomeLoan(int homeLoanId, String propertyType, String propertyAddress, String homeLoanAmount,
             int homeLoanPeriod, int homeLoanEmiPaid, User user) {
         this.homeLoanId = homeLoanId;
         this.propertyType = propertyType;
@@ -33,14 +36,14 @@ public class HomeLoan {
         this.homeLoanAmount = homeLoanAmount;
         this.homeLoanPeriod = homeLoanPeriod;
         this.homeLoanEmiPaid = homeLoanEmiPaid;
-        this.user = user;
+        // this.user = user;
     }
 
-    public String getHomeLoanId() {
+    public int getHomeLoanId() {
         return homeLoanId;
     }
 
-    public void setHomeLoanId(String homeLoanId) {
+    public void setHomeLoanId(int homeLoanId) {
         this.homeLoanId = homeLoanId;
     }
 
@@ -84,20 +87,20 @@ public class HomeLoan {
         this.homeLoanEmiPaid = homeLoanEmiPaid;
     }
 
-    public User getUser() {
-        return user;
-    }
+    // public User getUser() {
+    //     return user;
+    // }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    // public void setUser(User user) {
+    //     this.user = user;
+    // }
 
-    @Override
-    public String toString() {
-        return "HomeLoan [homeLoanAmount=" + homeLoanAmount + ", homeLoanEmiPaid=" + homeLoanEmiPaid + ", homeLoanId="
-                + homeLoanId + ", homeLoanPeriod=" + homeLoanPeriod + ", propertyAddress=" + propertyAddress
-                + ", propertyType=" + propertyType + ", user=" + user + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "HomeLoan [homeLoanAmount=" + homeLoanAmount + ", homeLoanEmiPaid=" + homeLoanEmiPaid + ", homeLoanId="
+    //             + homeLoanId + ", homeLoanPeriod=" + homeLoanPeriod + ", propertyAddress=" + propertyAddress
+    //             + ", propertyType=" + propertyType + ", user=" + user + "]";
+    // }
 
     
 }

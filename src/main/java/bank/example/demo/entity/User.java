@@ -4,28 +4,42 @@ package bank.example.demo.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private String userId;
-    @Column(nullable=false)
+    // @GenericGenerator(name="usr_generator",strategy="bank.example.demo.functionalities.UserIdGenerator")
+    // @GeneratedValue(generator = "usr_generator")
+    private int userId;
+
+    @Column(unique = true)
+    @GenericGenerator(name="acc_generator",strategy="bank.example.demo.functionalities.AccountNumberGenerator")
+    @GeneratedValue(generator = "acc_generator")
     private Long accountNumber;
+
     @Column(length = 255)
     private String firstName;
     @Column(length = 255)
     private String lastName;
-
+    @Column(unique=true)
     private String emailId;
 
+    @Column
     private int accountBalance;
 
+    @Column(unique = true)
     private String userName;
+
+    @Column(length=255)
+    private String password;
+
     @OneToOne
     @JoinColumn(name="walletId")
     private Wallet wallet;
@@ -34,19 +48,21 @@ public class User {
     @JoinColumn(name="homeLoanId")
     private HomeLoan homeLoan;
 
+    @Column
     private String branchName;
 
     @OneToOne
     @JoinColumn(name="vehicleLoanId")
     private VehicleLoan vehicleLoan;
 
+    @Column
     private int age;
     
     public User() {
     }
 
-    public User(String userId, Long accountNumber, String firstName, String lastName, String emailId,
-            int accountBalance, String userName, Wallet wallet, HomeLoan homeLoan, String branchName,
+    public User(int userId, Long accountNumber, String firstName, String lastName, String emailId,
+            int accountBalance, String userName, String password, Wallet wallet, HomeLoan homeLoan, String branchName,
             VehicleLoan vehicleLoan, int age) {
         this.userId = userId;
         this.accountNumber = accountNumber;
@@ -55,6 +71,7 @@ public class User {
         this.emailId = emailId;
         this.accountBalance = accountBalance;
         this.userName = userName;
+        this.password=password;
         this.wallet = wallet;
         this.homeLoan = homeLoan;
         this.branchName = branchName;
@@ -62,11 +79,11 @@ public class User {
         this.age = age;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -158,12 +175,20 @@ public class User {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "User [accountBalance=" + accountBalance + ", accountNumber=" + accountNumber + ", age=" + age
-                + ", branchName=" + branchName + ", emailId=" + emailId + ", firstName=" + firstName + ", homeLoan="
-                + homeLoan + ", lastName=" + lastName + ", userId=" + userId + ", userName=" + userName
-                + ", vehicleLoan=" + vehicleLoan + ", wallet=" + wallet + "]";
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    // @Override
+    // public String toString() {
+    //     return "User [accountBalance=" + accountBalance + ", accountNumber=" + accountNumber + ", age=" + age
+    //             + ", branchName=" + branchName + ", emailId=" + emailId + ", firstName=" + firstName + ", homeLoan="
+    //             + homeLoan + ", lastName=" + lastName + ", userId=" + userId + ", userName=" + userName
+    //             + ", vehicleLoan=" + vehicleLoan + ", wallet=" + wallet + "]";
+    // }
   
 }

@@ -1,19 +1,23 @@
 package bank.example.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Transactions {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String transactionId;
+    // @GenericGenerator(name="tx_generator",strategy="bank.example.demo.functionalities.TransactionIdGenerator")
+    // @GeneratedValue(generator = "tx_generator")
+    private int transactionId;
     
     private String transactionType;
     private String transactionBy;
+    @Column(unique = true)
     private String transactionByEmail;
     private int transactionAmount;
     private String transactionRemarks;
@@ -21,7 +25,7 @@ public class Transactions {
     public Transactions() {
     }
 
-    public Transactions(String transactionId, String transactionType, String transactionBy, String transactionByEmail,
+    public Transactions(int transactionId, String transactionType, String transactionBy, String transactionByEmail,
             int transactionAmount, String transactionRemarks) {
         this.transactionId = transactionId;
         this.transactionType = transactionType;
@@ -31,11 +35,11 @@ public class Transactions {
         this.transactionRemarks = transactionRemarks;
     }
 
-    public String getTransactionId() {
+    public int getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
     }
 

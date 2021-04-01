@@ -1,30 +1,36 @@
 package bank.example.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name="vehicleloan")
 public class VehicleLoan {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String vehicleLoanId;
+    // @GenericGenerator(name="vhc_generator",strategy="bank.example.demo.functionalities.VehicleLoanIdGenerator")
+    // @GeneratedValue(generator = "vhc_generator")
+    private int vehicleLoanId;
 
     private String vehicleType;
+    @Column(unique = true)
     private String vehicleNumber;
     private Long vehicleLoanAmount;
     private int vehicleLoanPeriod;
     private int vehicleLoanEMIPaid;
 
-    @OneToOne(mappedBy = "vehicleLoan")
-    private User user;
+    // @OneToOne(mappedBy = "vehicleLoan")
+    // private User user;
 
     public VehicleLoan() {
     }
 
-    public VehicleLoan(String vehicleLoanId, String vehicleType, String vehicleNumber, Long vehicleLoanAmount,
+    public VehicleLoan(int vehicleLoanId, String vehicleType, String vehicleNumber, Long vehicleLoanAmount,
             int vehicleLoanPeriod, int vehicleLoanEMIPaid, User user) {
         this.vehicleLoanId = vehicleLoanId;
         this.vehicleType = vehicleType;
@@ -32,14 +38,14 @@ public class VehicleLoan {
         this.vehicleLoanAmount = vehicleLoanAmount;
         this.vehicleLoanPeriod = vehicleLoanPeriod;
         this.vehicleLoanEMIPaid = vehicleLoanEMIPaid;
-        this.user = user;
+        // this.user = user;
     }
 
-    public String getVehicleLoanId() {
+    public int getVehicleLoanId() {
         return vehicleLoanId;
     }
 
-    public void setVehicleLoanId(String vehicleLoanId) {
+    public void setVehicleLoanId(int vehicleLoanId) {
         this.vehicleLoanId = vehicleLoanId;
     }
 
@@ -83,20 +89,20 @@ public class VehicleLoan {
         this.vehicleLoanEMIPaid = vehicleLoanEMIPaid;
     }
 
-    public User getUser() {
-        return user;
-    }
+    // public User getUser() {
+    //     return user;
+    // }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    // public void setUser(User user) {
+    //     this.user = user;
+    // }
 
-    @Override
-    public String toString() {
-        return "VehicleLoan [user=" + user + ", vehicleLoanAmount=" + vehicleLoanAmount + ", vehicleLoanEMIPaid="
-                + vehicleLoanEMIPaid + ", vehicleLoanId=" + vehicleLoanId + ", vehicleLoanPeriod=" + vehicleLoanPeriod
-                + ", vehicleNumber=" + vehicleNumber + ", vehicleType=" + vehicleType + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "VehicleLoan [user=" + user + ", vehicleLoanAmount=" + vehicleLoanAmount + ", vehicleLoanEMIPaid="
+    //             + vehicleLoanEMIPaid + ", vehicleLoanId=" + vehicleLoanId + ", vehicleLoanPeriod=" + vehicleLoanPeriod
+    //             + ", vehicleNumber=" + vehicleNumber + ", vehicleType=" + vehicleType + "]";
+    // }
 
     
 }

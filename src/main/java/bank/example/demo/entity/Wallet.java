@@ -3,37 +3,39 @@ package bank.example.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Wallet {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String walletId;
+    // @GenericGenerator(name="wlt_generator",strategy="bank.example.demo.functionalities.WalletIdGenerator")
+    // @GeneratedValue(generator = "wlt_generator")
+    private int walletId;
     
     private String walletOwnerName;
     private int walletBalance;
     
-    @OneToOne(mappedBy = "wallet")
-    private User user;
+    // @OneToOne(mappedBy = "wallet")
+    // private User user;
 
     public Wallet() {
     }
 
-    public Wallet(String walletId, String walletOwnerName, int walletBalance, User user) {
+    public Wallet(int walletId, String walletOwnerName, int walletBalance, User user) {
         this.walletId = walletId;
         this.walletOwnerName = walletOwnerName;
         this.walletBalance = walletBalance;
-        this.user = user;
+        // this.user = user;
     }
 
-    public String getWalletId() {
+    public int getWalletId() {
         return walletId;
     }
 
-    public void setWalletId(String walletId) {
+    public void setWalletId(int walletId) {
         this.walletId = walletId;
     }
 
@@ -53,18 +55,18 @@ public class Wallet {
         this.walletBalance = walletBalance;
     }
 
-    public User getUser() {
-        return user;
-    }
+    // public User getUser() {
+    //     return user;
+    // }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    // public void setUser(User user) {
+    //     this.user = user;
+    // }
 
-    @Override
-    public String toString() {
-        return "Wallet [user=" + user + ", walletBalance=" + walletBalance + ", walletId=" + walletId
-                + ", walletOwnerName=" + walletOwnerName + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "Wallet [user=" + user + ", walletBalance=" + walletBalance + ", walletId=" + walletId
+    //             + ", walletOwnerName=" + walletOwnerName + "]";
+    // }
 
 }
