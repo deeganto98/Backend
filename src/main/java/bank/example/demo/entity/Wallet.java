@@ -1,18 +1,21 @@
 package bank.example.demo.entity;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Wallet {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name="txn_generator",strategy="bank.example.demo.generators.WalletIdGenerator")
+    @GeneratedValue(generator = "txn_generator")
+    @Column(length = 64)
     private String walletId;
-    
     private String walletOwnerName;
     private int walletBalance;
     

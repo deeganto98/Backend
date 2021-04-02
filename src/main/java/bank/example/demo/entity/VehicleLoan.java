@@ -1,23 +1,25 @@
 package bank.example.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class VehicleLoan {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name="txn_generator",strategy="bank.example.demo.generators.VehicleLoanIdGenerator")
+    @GeneratedValue(generator = "txn_generator")
+    @Column(length = 64)
     private String vehicleLoanId;
-
     private String vehicleType;
     private String vehicleNumber;
     private Long vehicleLoanAmount;
     private int vehicleLoanPeriod;
     private int vehicleLoanEMIPaid;
-
     @OneToOne(mappedBy = "vehicleLoan")
     private User user;
 
@@ -25,7 +27,7 @@ public class VehicleLoan {
     }
 
     public VehicleLoan(String vehicleLoanId, String vehicleType, String vehicleNumber, Long vehicleLoanAmount,
-            int vehicleLoanPeriod, int vehicleLoanEMIPaid, User user) {
+        int vehicleLoanPeriod, int vehicleLoanEMIPaid, User user) {
         this.vehicleLoanId = vehicleLoanId;
         this.vehicleType = vehicleType;
         this.vehicleNumber = vehicleNumber;

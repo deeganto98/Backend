@@ -4,28 +4,31 @@ package bank.example.demo.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GenericGenerator(name="userid_generator",strategy="bank.example.demo.generators.UserIdGenerator")
+    @GeneratedValue(generator = "userid_generator")
+    @Column(length = 64)
     private String userId;
-    @Column(nullable=false)
     private Long accountNumber;
     @Column(length = 255)
     private String firstName;
     @Column(length = 255)
     private String lastName;
-
+    
     private String emailId;
 
     private int accountBalance;
 
     private String userName;
+
     @OneToOne
     @JoinColumn(name="walletId")
     private Wallet wallet;
