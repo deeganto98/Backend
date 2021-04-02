@@ -5,24 +5,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Wallet {
     @Id
-<<<<<<< HEAD
     @GenericGenerator(name="txn_generator",strategy="bank.example.demo.generators.WalletIdGenerator")
     @GeneratedValue(generator = "txn_generator")
     @Column(length = 64)
     private String walletId;
-=======
-    // @GenericGenerator(name="wlt_generator",strategy="bank.example.demo.functionalities.WalletIdGenerator")
-    // @GeneratedValue(generator = "wlt_generator")
-    private int walletId;
-    
->>>>>>> 66fa61612daac949a2ad97ed73ec861b3ccd304a
     private String walletOwnerName;
     private int walletBalance;
     
@@ -32,18 +24,18 @@ public class Wallet {
     public Wallet() {
     }
 
-    public Wallet(int walletId, String walletOwnerName, int walletBalance, User user) {
+    public Wallet(String walletId, String walletOwnerName, int walletBalance, User user) {
         this.walletId = walletId;
         this.walletOwnerName = walletOwnerName;
         this.walletBalance = walletBalance;
         // this.user = user;
     }
 
-    public int getWalletId() {
+    public String getWalletId() {
         return walletId;
     }
 
-    public void setWalletId(int walletId) {
+    public void setWalletId(String walletId) {
         this.walletId = walletId;
     }
 

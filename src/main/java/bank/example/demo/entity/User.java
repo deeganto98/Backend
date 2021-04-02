@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "user")
@@ -22,7 +21,6 @@ public class User {
     @Column(length = 64)
     private String userId;
     private Long accountNumber;
-
     @Column(length = 255)
     private String firstName;
     @Column(length = 255)
@@ -33,8 +31,9 @@ public class User {
     @Column
     private int accountBalance;
 
-    @Column(unique = true)
+    @Column(unique = true,length = 64)
     private String userName;
+    private String password;
 
     @OneToOne
     @JoinColumn(name="walletId")
@@ -57,7 +56,7 @@ public class User {
     public User() {
     }
 
-    public User(int userId, Long accountNumber, String firstName, String lastName, String emailId,
+    public User(String userId, Long accountNumber, String firstName, String lastName, String emailId,
             int accountBalance, String userName, String password, Wallet wallet, HomeLoan homeLoan, String branchName,
             VehicleLoan vehicleLoan, int age) {
         this.userId = userId;
@@ -75,11 +74,11 @@ public class User {
         this.age = age;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -178,13 +177,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    // @Override
-    // public String toString() {
-    //     return "User [accountBalance=" + accountBalance + ", accountNumber=" + accountNumber + ", age=" + age
-    //             + ", branchName=" + branchName + ", emailId=" + emailId + ", firstName=" + firstName + ", homeLoan="
-    //             + homeLoan + ", lastName=" + lastName + ", userId=" + userId + ", userName=" + userName
-    //             + ", vehicleLoan=" + vehicleLoan + ", wallet=" + wallet + "]";
-    // }
   
 }
