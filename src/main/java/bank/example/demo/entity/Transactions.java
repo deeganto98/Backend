@@ -11,12 +11,20 @@ import org.hibernate.annotations.GenericGenerator;
 public class Transactions {
     
     @Id
+<<<<<<< HEAD
     @GenericGenerator(name="txn_generator",strategy="bank.example.demo.generators.TransactionIdGenerator")
     @GeneratedValue(generator = "txn_generator")
     @Column(length = 64)
     private String transactionId;
+=======
+    // @GenericGenerator(name="tx_generator",strategy="bank.example.demo.functionalities.TransactionIdGenerator")
+    // @GeneratedValue(generator = "tx_generator")
+    private int transactionId;
+    
+>>>>>>> 66fa61612daac949a2ad97ed73ec861b3ccd304a
     private String transactionType;
     private String transactionBy;
+    @Column(unique = true)
     private String transactionByEmail;
     private int transactionAmount;
     private String transactionRemarks;
@@ -24,7 +32,7 @@ public class Transactions {
     public Transactions() {
     }
 
-    public Transactions(String transactionId, String transactionType, String transactionBy, String transactionByEmail,
+    public Transactions(int transactionId, String transactionType, String transactionBy, String transactionByEmail,
             int transactionAmount, String transactionRemarks) {
         this.transactionId = transactionId;
         this.transactionType = transactionType;
@@ -34,11 +42,11 @@ public class Transactions {
         this.transactionRemarks = transactionRemarks;
     }
 
-    public String getTransactionId() {
+    public int getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
     }
 
