@@ -1,8 +1,10 @@
 package bank.example.demo.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -35,18 +37,18 @@ public class User {
     private String userName;
     private String password;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="walletId")
     private Wallet wallet;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="homeLoanId")
     private HomeLoan homeLoan;
 
     @Column
     private String branchName;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="vehicleLoanId")
     private VehicleLoan vehicleLoan;
 

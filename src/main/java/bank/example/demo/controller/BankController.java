@@ -1,13 +1,15 @@
 package bank.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bank.example.demo.entity.User;
-import bank.example.demo.repository.UserRepository;
+import bank.example.demo.service.UserService;
+import bank.example.demo.service.WalletService;
 
 
 @RestController
@@ -15,11 +17,28 @@ import bank.example.demo.repository.UserRepository;
 public class BankController {
     
     @Autowired
-    UserRepository repo;
+    UserService userService;
+
+    @Autowired
+    WalletService walletservice;
     
     @PostMapping("/signup")
     public User signUp(@RequestBody User user){
-        user.setAccountNumber((long)(Math.random() * 90000000) + 10000000);
-        return repo.save(user);
+        
+        return this.userService.createUser(user);
+    }
+
+    @PostMapping("/createwallet")
+    public boolean createWallet(@RequestBody String userEmail){
+        return this.walletservice.createWallet(userEmail);
+    }
+
+    @PostMapping("/getwalletmoney")
+    public int getWalletMoney(@RequestBody String userEmail){
+        return this.walletservice.getWalletMoney(userEmail);
+    }
+    @PostMapping("/addwalletmoney/{money}")
+    public int addWalletMoney(@RequestBody String userEmail,@PathVariable int money){
+        return this.walletservice.addWalletMoney(userEmail,money);
     }
 }
