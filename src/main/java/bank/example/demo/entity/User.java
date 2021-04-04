@@ -1,6 +1,5 @@
 package bank.example.demo.entity;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +12,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
 @Table(name = "user")
 public class User {
     @Id
-    @GenericGenerator(name="userid_generator",strategy="bank.example.demo.generators.UserIdGenerator")
+    @GenericGenerator(name = "userid_generator", strategy = "bank.example.demo.generators.UserIdGenerator")
     @GeneratedValue(generator = "userid_generator")
     @Column(length = 64)
     private String userId;
@@ -27,34 +25,34 @@ public class User {
     private String firstName;
     @Column(length = 255)
     private String lastName;
-    
+    @Column(unique = true)
     private String emailId;
 
     @Column
     private int accountBalance;
 
-    @Column(unique = true,length = 64)
+    @Column(unique = true, length = 64)
     private String userName;
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name="walletId")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "walletId")
     private Wallet wallet;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name="homeLoanId")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "homeLoanId")
     private HomeLoan homeLoan;
 
     @Column
     private String branchName;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name="vehicleLoanId")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "vehicleLoanId")
     private VehicleLoan vehicleLoan;
 
     @Column
     private int age;
-    
+
     public User() {
     }
 
@@ -68,7 +66,7 @@ public class User {
         this.emailId = emailId;
         this.accountBalance = accountBalance;
         this.userName = userName;
-        this.password=password;
+        this.password = password;
         this.wallet = wallet;
         this.homeLoan = homeLoan;
         this.branchName = branchName;
@@ -179,5 +177,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-  
+
 }

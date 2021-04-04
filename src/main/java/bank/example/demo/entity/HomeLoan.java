@@ -9,9 +9,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class HomeLoan {
-    
+
     @Id
-    @GenericGenerator(name="txn_generator",strategy="bank.example.demo.generators.HomeLoanIdGenerator")
+    @GenericGenerator(name = "txn_generator", strategy = "bank.example.demo.generators.HomeLoanIdGenerator")
     @GeneratedValue(generator = "txn_generator")
     @Column(length = 64)
     private String homeLoanId;
@@ -80,5 +80,5 @@ public class HomeLoan {
 
     public void setHomeLoanEmiPaid(int homeLoanEmiPaid) {
         this.homeLoanEmiPaid = homeLoanEmiPaid;
-    }   
+    }
 }

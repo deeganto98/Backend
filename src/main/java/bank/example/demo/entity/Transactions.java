@@ -9,19 +9,19 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Transactions {
-    
+
     @Id
-    @GenericGenerator(name="txn_generator",strategy="bank.example.demo.generators.TransactionIdGenerator")
+    @GenericGenerator(name = "txn_generator", strategy = "bank.example.demo.generators.TransactionIdGenerator")
     @GeneratedValue(generator = "txn_generator")
     @Column(length = 64)
     private String transactionId;
     private String transactionType;
     private String transactionBy;
-    @Column(unique = true,length = 64)
+    @Column(unique = true, length = 64)
     private String transactionByEmail;
     private int transactionAmount;
     private String transactionRemarks;
-    
+
     public Transactions() {
     }
 
