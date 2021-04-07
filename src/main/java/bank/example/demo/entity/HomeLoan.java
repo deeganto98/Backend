@@ -1,9 +1,12 @@
 package bank.example.demo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,21 +20,29 @@ public class HomeLoan {
     private String homeLoanId;
     private String propertyType;
     private String propertyAddress;
-    private String homeLoanAmount;
+    private Long homeLoanAmount;
     private int homeLoanPeriod;
+    @Column(nullable = true)
     private int homeLoanEmiPaid;
+
+    private int emiToBePaid;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "homeLoan")
+    private User user;
+
 
     public HomeLoan() {
     }
 
-    public HomeLoan(String homeLoanId, String propertyType, String propertyAddress, String homeLoanAmount,
-            int homeLoanPeriod, int homeLoanEmiPaid, User user) {
+    public HomeLoan(String homeLoanId, String propertyType, String propertyAddress, Long homeLoanAmount,
+            int homeLoanPeriod, int homeLoanEmiPaid, int emiToBePaid, User user) {
         this.homeLoanId = homeLoanId;
         this.propertyType = propertyType;
         this.propertyAddress = propertyAddress;
         this.homeLoanAmount = homeLoanAmount;
         this.homeLoanPeriod = homeLoanPeriod;
         this.homeLoanEmiPaid = homeLoanEmiPaid;
+        this.emiToBePaid = emiToBePaid;
+        this.user = user;
     }
 
     public String getHomeLoanId() {
@@ -58,11 +69,11 @@ public class HomeLoan {
         this.propertyAddress = propertyAddress;
     }
 
-    public String getHomeLoanAmount() {
+    public Long getHomeLoanAmount() {
         return homeLoanAmount;
     }
 
-    public void setHomeLoanAmount(String homeLoanAmount) {
+    public void setHomeLoanAmount(Long homeLoanAmount) {
         this.homeLoanAmount = homeLoanAmount;
     }
 
@@ -81,4 +92,25 @@ public class HomeLoan {
     public void setHomeLoanEmiPaid(int homeLoanEmiPaid) {
         this.homeLoanEmiPaid = homeLoanEmiPaid;
     }
+
+    public int getEmiToBePaid() {
+        return emiToBePaid;
+    }
+
+    public void setEmiToBePaid(int emiToBePaid) {
+        this.emiToBePaid = emiToBePaid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+
+    
+
 }

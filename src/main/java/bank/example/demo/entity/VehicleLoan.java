@@ -1,9 +1,12 @@
 package bank.example.demo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -23,20 +26,13 @@ public class VehicleLoan {
     private Long vehicleLoanAmount;
     private int vehicleLoanPeriod;
     private int vehicleLoanEMIPaid;
-
+    private int emiToBePaid;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private User user;
     public VehicleLoan() {
     }
 
-    public VehicleLoan(String vehicleLoanId, String vehicleType, String vehicleNumber, Long vehicleLoanAmount,
-        int vehicleLoanPeriod, int vehicleLoanEMIPaid, User user) {
-        this.vehicleLoanId = vehicleLoanId;
-        this.vehicleType = vehicleType;
-        this.vehicleNumber = vehicleNumber;
-        this.vehicleLoanAmount = vehicleLoanAmount;
-        this.vehicleLoanPeriod = vehicleLoanPeriod;
-        this.vehicleLoanEMIPaid = vehicleLoanEMIPaid;
-        // this.user = user;
-    }
+    
 
     public String getVehicleLoanId() {
         return vehicleLoanId;
@@ -86,13 +82,31 @@ public class VehicleLoan {
         this.vehicleLoanEMIPaid = vehicleLoanEMIPaid;
     }
 
-    // public User getUser() {
-    //     return user;
-    // }
 
-    // public void setUser(User user) {
-    //     this.user = user;
-    // }
+
+    public int getEmiToBePaid() {
+        return emiToBePaid;
+    }
+
+
+
+    public void setEmiToBePaid(int emiToBePaid) {
+        this.emiToBePaid = emiToBePaid;
+    }
+
+
+
+    public User getUser() {
+        return user;
+    }
+
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
 
     // @Override
     // public String toString() {

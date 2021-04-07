@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User,String> {
     @Query("from User where emailId=?1")
    public User findByemailId(String userEmail);
 
+    @Query("from User where accountNumber=?1")
+    public User findByAccountNumber(Long accountNumber);
+
 }   
